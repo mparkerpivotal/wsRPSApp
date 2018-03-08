@@ -1,6 +1,12 @@
 function Rps(){
     this.play = function(p1, p2, observer){
-        if (anyInputInvalid())
+        new PlayRequest(p1, p2, observer).process()
+    }
+}
+
+function PlayRequest(p1, p2, observer){
+    this.process = function(){
+        if (inputInvalid(p1) || inputInvalid(p2))
             observer.invalid()
         else if (draw())
             observer.tie()
@@ -8,18 +14,18 @@ function Rps(){
             observer.p1Wins()
         else
             observer.p2Wins()
+    }
 
-        function anyInputInvalid() {
-            return !["rock", "paper", "scissors"].includes(p1) || !["rock", "paper", "scissors"].includes(p2);
-        }
+    function inputInvalid(input) {
+        return !["rock", "paper", "scissors"].includes(input);
+    }
 
-        function draw() {
-            return p1 === p2;
-        }
+    function draw() {
+        return p1 === p2;
+    }
 
-        function p1Wins() {
-            return p1 === "rock" && p2 === "scissors" || p1 === "scissors" && p2 === "paper" || p1 === "paper" && p2 === "rock";
-        }
+    function p1Wins() {
+        return p1 === "rock" && p2 === "scissors" || p1 === "scissors" && p2 === "paper" || p1 === "paper" && p2 === "rock";
     }
 }
 
