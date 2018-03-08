@@ -1,3 +1,4 @@
 1. git clone https://github.com/moonmaster9000/wsRPSApp.git
-2. cd rps
-3. npm install
+1. cd wsRPSApp
+1. cd rps
+1. npm install
