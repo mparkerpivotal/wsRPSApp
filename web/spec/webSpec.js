@@ -20,6 +20,14 @@ class PlayForm extends React.Component {
         this.setState({result: "TIE"})
     }
 
+    p1Wins(){
+        this.setState({result: "P1 Wins!"})
+    }
+
+    p2Wins(){
+        this.setState({result: "P2 Wins!"})
+    }
+
     render() {
         return <div>
             {this.state.result}
@@ -52,6 +60,32 @@ describe("play form", function () {
             expect(page()).toContain("TIE")
         })
     })
+
+    describe("request processes as p1Wins", function () {
+        beforeEach(function () {
+            renderForm({play(p1, p2, observer){observer.p1Wins()}})
+        })
+
+        it("display 'P1 Wins!'", function () {
+            expect(page()).not.toContain("P1 Wins!")
+            submitForm()
+            expect(page()).toContain("P1 Wins!")
+        })
+    })
+
+
+    describe("request processes as p2Wins", function () {
+        beforeEach(function () {
+            renderForm({play(p1, p2, observer){observer.p2Wins()}})
+        })
+
+        it("display 'P2 Wins!'", function () {
+            expect(page()).not.toContain("P2 Wins!")
+            submitForm()
+            expect(page()).toContain("P2 Wins!")
+        })
+    })
+
 
     let domFixture
 
