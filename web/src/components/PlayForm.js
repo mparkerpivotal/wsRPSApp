@@ -8,7 +8,7 @@ class PlayForm extends React.Component {
     }
 
     handleSubmit() {
-        this.props.rps.play(this.state.p1Throw, this.state.p2Throw, this)
+        this.props.rps.playRound(this.state.p1Throw, this.state.p2Throw, this)
     }
 
     invalid(){

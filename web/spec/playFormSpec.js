@@ -6,7 +6,7 @@ const PlayForm = require("../src/components/PlayForm")
 describe("play form", function () {
     describe("request processes as invalid", function () {
         beforeEach(function () {
-            renderForm({play(p1, p2, observer){observer.invalid()}})
+            renderForm({playRound(p1, p2, observer){observer.invalid()}})
         })
 
         it("display 'INVALID'", function () {
@@ -18,7 +18,7 @@ describe("play form", function () {
 
     describe("request processes as tie", function () {
         beforeEach(function () {
-            renderForm({play(p1, p2, observer){observer.tie()}})
+            renderForm({playRound(p1, p2, observer){observer.tie()}})
         })
 
         it("display 'TIE'", function () {
@@ -30,7 +30,7 @@ describe("play form", function () {
 
     describe("request processes as p1Wins", function () {
         beforeEach(function () {
-            renderForm({play(p1, p2, observer){observer.p1Wins()}})
+            renderForm({playRound(p1, p2, observer){observer.p1Wins()}})
         })
 
         it("display 'P1 Wins!'", function () {
@@ -43,7 +43,7 @@ describe("play form", function () {
 
     describe("request processes as p2Wins", function () {
         beforeEach(function () {
-            renderForm({play(p1, p2, observer){observer.p2Wins()}})
+            renderForm({playRound(p1, p2, observer){observer.p2Wins()}})
         })
 
         it("display 'P2 Wins!'", function () {
@@ -63,7 +63,7 @@ describe("play form", function () {
     it('sends the user input to the RPS component', function () {
         let playSpy = jasmine.createSpy("playSpy")
         
-        renderForm({play: playSpy})
+        renderForm({playRound: playSpy})
 
         fillIn("p1Throw", "foo")
         fillIn("p2Throw", "bar")
