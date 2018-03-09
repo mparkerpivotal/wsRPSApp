@@ -1,5 +1,6 @@
 const ReactDOM = require("react-dom")
 const React = require("react")
+const ReactTestUtils = require("react-dom/test-utils")
 
 class PlayForm extends React.Component {
     constructor(){
@@ -84,6 +85,26 @@ describe("play form", function () {
             submitForm()
             expect(page()).toContain("P2 Wins!")
         })
+    })
+
+    it('sends the user input to the RPS component', function () {  
+        let playSpy = jasmine.createSpy("playSpy")
+        
+        renderForm({play: playSpy})
+        
+        let input
+        
+        input = document.querySelector("[name='p1Throw']")
+        input.value = "foo"
+        ReactTestUtils.Simulate.change(input)
+        
+        input = document.querySelector("[name='p2Throw']")
+        input.value = "bar"
+        ReactTestUtils.Simulate.change(input)
+
+        submitForm()
+
+        expect(playSpy).toHaveBeenCalledWith("foo", "bar", jasmine.any(Object))
     })
 
 
