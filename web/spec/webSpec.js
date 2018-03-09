@@ -103,9 +103,9 @@ describe("play form", function () {
         domFixture.remove()
     })
 
-    function renderForm(alwaysInvalidRps) {
+    function renderForm(rpsStub) {
         ReactDOM.render(
-            <PlayForm rps={alwaysInvalidRps}/>,
+            <PlayForm rps={rpsStub}/>,
             domFixture
         )
     }
