@@ -47,26 +47,51 @@ describe("history", function () {
 });
 
 function FakeRoundRepo(){
+    let rounds = []
 
+    this.isEmpty = function(){
+        return rounds.length === 0
+    }
+
+    this.save = function(r){
+        rounds.push(r)
+    }
+
+    this.getAll = function(){
+        return rounds
+    }
 }
 
 fdescribe("round repo contract", function () {
+    let repo
+
+    beforeEach(function () {
+        repo = new FakeRoundRepo()
+    })
+
     describe("when no rounds have been saved", function () {
         it('should be empty', function () {
             let repo = new FakeRoundRepo()
 
             expect(repo.isEmpty()).toBe(true)
-        });
-    });
+        })
+    })
 
     describe("when rounds have been saved", function () {
-        it('should not be empty', function () {
+        let round
 
-        });
+        beforeEach(function () {
+            round = new Round("foo", "bar", "baz")
+            repo.save(round)
+        })
+
+        it('should not be empty', function () {
+            expect(repo.isEmpty()).toBe(false)
+        })
 
         it("should return all the rounds that have been saved", function () {
+            expect(repo.getAll()).toEqual([round])
+        })
 
-        });
-
-    });
-});
+    })
+})
