@@ -73,35 +73,11 @@ describe("play form", function () {
         expect(playSpy).toHaveBeenCalledWith("foo", "bar", jasmine.any(Object))
     })
 
-
-    let domFixture
-
-    function setupDOM() {
-        domFixture = document.createElement("div")
-        domFixture.id = "hello!!!"
-        document.body.appendChild(domFixture)
-    }
-
-    beforeEach(function () {
-        setupDOM()
-    })
-
-    afterEach(function () {
-        domFixture.remove()
-    })
-
     function renderForm(rpsStub) {
-        ReactDOM.render(
-            <PlayForm rps={rpsStub}/>,
-            domFixture
-        )
+        renderComponent(<PlayForm rps={rpsStub}/>)
     }
 
-    function page() {
-        return domFixture.innerText;
-    }
-
-    function submitForm() {
+    function submitForm(){
         document.querySelector("button").click()
     }
 })

@@ -30,29 +30,9 @@ describe("history", function () {
         })
     })
 
-    let domFixture, rpsStub
-
-    function setupDOM() {
-        domFixture = document.createElement("div")
-        document.body.appendChild(domFixture)
-    }
-
-    beforeEach(function () {
-        setupDOM()
-    })
-
-    afterEach(function () {
-        domFixture.remove()
-    })
+    let rpsStub
 
     function renderHistory(rpsStub) {
-        ReactDOM.render(
-            <History rps={rpsStub}/>,
-            domFixture
-        )
-    }
-
-    function page() {
-        return domFixture.innerText
+        renderComponent(<History rps={rpsStub}/>)
     }
 })

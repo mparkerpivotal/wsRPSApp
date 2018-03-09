@@ -23,7 +23,6 @@ class History extends React.Component {
             {this.state.display}
         </div>
     }
-
 }
 
 class NoRounds extends React.Component {
