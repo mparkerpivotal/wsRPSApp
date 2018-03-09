@@ -29,19 +29,15 @@ class PlayForm extends React.Component {
         this.setState({result: "P2 Wins!"})
     }
 
-    handleP1ThrowChange(e){
-        this.setState({p1Throw: e.target.value})
-    }
-
-    handleP2ThrowChange(e){
-        this.setState({p2Throw: e.target.value})
+    handleThrowChange(e){
+        this.setState({[e.target.name]: e.target.value})
     }
 
     render() {
         return <div>
             {this.state.result}
-            <input name="p1Throw" onChange={this.handleP1ThrowChange.bind(this)}/>
-            <input name="p2Throw" onChange={this.handleP2ThrowChange.bind(this)}/>
+            <input name="p1Throw" onChange={this.handleThrowChange.bind(this)}/>
+            <input name="p2Throw" onChange={this.handleThrowChange.bind(this)}/>
             <button onClick={this.handleSubmit.bind(this)}>PLAY</button>
         </div>
     }
@@ -97,20 +93,20 @@ describe("play form", function () {
         })
     })
 
-    it('sends the user input to the RPS component', function () {  
+    function fillIn(inputName, inputValue) {
+        let input
+        input = document.querySelector(`[name='${inputName}']`)
+        input.value = inputValue
+        ReactTestUtils.Simulate.change(input)
+    }
+
+    it('sends the user input to the RPS component', function () {
         let playSpy = jasmine.createSpy("playSpy")
         
         renderForm({play: playSpy})
-        
-        let input
-        
-        input = document.querySelector("[name='p1Throw']")
-        input.value = "foo"
-        ReactTestUtils.Simulate.change(input)
-        
-        input = document.querySelector("[name='p2Throw']")
-        input.value = "bar"
-        ReactTestUtils.Simulate.change(input)
+
+        fillIn("p1Throw", "foo")
+        fillIn("p2Throw", "bar")
 
         submitForm()
 
